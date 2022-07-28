@@ -1,31 +1,26 @@
 // constants
 const timeEl = document.querySelector('.time');
 const dateEl = document.querySelector('.date');
+const cityEl = document.querySelector('.city');
 
 
 
-// Date & Time funcs
+// Date & Time getters
 const getTime = () => {
   let now = new Date();
-  let h = now.getHours().toLocaleString();
-  let m = now.getMinutes().toLocaleString();
-  let s = now.getSeconds().toLocaleString();
-
-  return `${h}:${m}:${s}`;
+  return now.toLocaleTimeString();
 }
 
 const getDate = () => {
   let now = new Date();
   let options = {
-
     year: 'numeric',
     month: 'long',
     day: 'numeric',
     weekday: 'long',
-
   };
-
-  return now.toLocaleString("ru", options);
+  
+  return now.toLocaleString("ru-RU", options);
 }
 
 
@@ -37,9 +32,9 @@ const getDate = () => {
 
 // Invoking
 // Date once on load/reload
-dateEl.innerHTML = getDate();
+dateEl.textContent = getDate();
 
 // Time every second
 setInterval(() => {
-  timeEl.innerHTML = getTime();
+  timeEl.textContent = getTime();
 }, 1000);
