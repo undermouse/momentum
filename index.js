@@ -59,9 +59,10 @@ setInterval(() => {
   greetEl.textContent = setGreeting();
 }, 60000);
 
-// Setiing date() + loading username
+// Setiing date(), greeting, loading username 
 window.addEventListener('load', () => {
     nameEl.value = LS.getItem('name')
+    greetEl.textContent = setGreeting();
     dateEl.textContent = getDate();
 })
 
