@@ -1,3 +1,5 @@
+import playList from "./playList";
+
 // constants
 const timeEl   = document.querySelector('.time');
 const dateEl   = document.querySelector('.date');
@@ -13,6 +15,50 @@ const changeQuote = document.querySelector('.change-quote');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
+const selectedSong = document.querySelector('.play-item');
+const playPrevBtn = document.querySelector('.play-prev');
+const playNextBtn = document.querySelector('.play-next');
+const playBtn  = document.getElementById('play-btn');
+let isPlay = false;
+let playNum = 0;
+const currentSong = document.querySelector('.play-item');
+
+const audio = new Audio(); 
+
+const toggleAudio = () => {
+  if (isPlay === false) { 
+    audio.src = playList[playNum].src;
+    audio.play();
+    audio.currentTime = 0; 
+    isPlay = true;
+    currentSong.classList.add('playing');
+  } else {
+    audio.pause();
+    audio.currentTime = 0; 
+    isPlay = false;
+    currentSong.classList.remove('playing');
+  }
+}
+
+const playNext = () => {
+  playNum += 1;
+  audio.play();
+}
+
+const playPrev = () => {
+  playNum -= 1;
+  audio.play()
+}
+
+playBtn.onclick = () => {
+   toggleAudio();
+   playBtn.classList.toggle('pause');
+}
+
+currentSong.onclick = () => {
+  currentSong.classList.add('playing')
+}
+
 
 // Additional funcs
 const getRandomInt = (min, max) => {

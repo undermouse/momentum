@@ -52,6 +52,10 @@ body {
   transition: .3s;
 }
 
+.playing {
+  color: dodgerblue;
+}
+
 .play-item:hover {
   opacity: 1;
 }
