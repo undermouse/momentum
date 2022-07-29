@@ -52,18 +52,20 @@ const getTimeName = () => {
   let m = now.getMinutes();
   let timeName = '';
 
-  if (h > 6 && h < 12 && m < 59) {
+  if (h > 6 && h < 12 && m <= 59) {
     timeName = 'morning';
-  } else if (h > 12 && h < 17 && m < 59) {
+  } else if (h >= 12 && h < 17 && m <= 59) {
     timeName = 'afternoon';
-  } else if (h > 18 && h < 25 && m < 59) {
+  } else if (h >= 18 && h < 25 && m <= 59) {
     timeName = 'evening';
-  } else if (h > 0 && h < 6 && m < 59) {
+  } else if (h >= 0 &&  h < 6 && m <= 59) {
     timeName = 'night';
   } 
-
+  
   return timeName;
 }
+
+
 
 // Background 
 const setBg = (bgNum) => {
