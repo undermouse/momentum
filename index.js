@@ -4,7 +4,10 @@ const dateEl   = document.querySelector('.date');
 const cityEl   = document.querySelector('.city');
 const greetEl  = document.querySelector('.greeting');
 const nameEl   = document.querySelector('.name');
+const slideNext= document.querySelector('.slide-next');
+const slidePrev= document.querySelector('.slide-prev');;
 const LS       = window.localStorage;
+
 
 // Additional funcs
 const getRandomInt = (min, max) => {
@@ -16,6 +19,8 @@ const getRandomInt = (min, max) => {
   }
   return String(num);
 } // min 1, max 20
+
+let randomNum  = getRandomInt(1, 20);
 
 
 // Date, Time, greeting funcs
@@ -56,14 +61,34 @@ const getTimeName = () => {
 }
 
 // Background 
-const setBg = () => {
+const setBg = (bgNum) => {
   let timeOfDay = getTimeName();
-  let bgNum = getRandomInt(1, 20);
   let bgUrl = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
   let body = document.getElementById('body');
 
-  body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg')`;
+  body.style.backgroundImage = `url('${bgUrl}')`;
 }
+const getSlideNext = () => {
+  randomNum = Number(randomNum);
+  if (randomNum < 20) {
+    randomNum += 1;
+  } else {
+    randomNum = 1;
+  }
+  let nextBg = String(randomNum).padStart(2, 0);
+  setBg(nextBg);
+};
+
+const getSlidePrev = () => {
+  randomNum = Number(randomNum);
+  if (randomNum > 1) {
+    randomNum -= 1;
+  } else {
+    randomNum = 20;
+  }
+  let prevBg = String(randomNum).padStart(2, 0);
+  setBg(prevBg);
+};
 
 
 
@@ -83,10 +108,22 @@ window.addEventListener('load', () => {
     greetEl.textContent = `Good ${getTimeName()}, `;
     dateEl.textContent = getDate();
     timeEl.textContent = getTimeOfDay();
-    setBg();
-})
+    setBg(randomNum);
+    // FIXME: smooth loading for images: 
+     //https://github.com/rolling-scopes-school/tasks/blob/master/tasks/momentum/momentum-slider.md
+  }); 
+  
 
 // Saving username
 nameEl.addEventListener('input', () => {
   LS.setItem('name', nameEl.value); 
+})
+
+// Slides switchers
+slideNext.addEventListener('click', () => {
+  getSlideNext();
+})
+
+slidePrev.addEventListener('click', () => {
+  getSlidePrev();
 })
