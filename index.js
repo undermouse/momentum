@@ -7,6 +7,9 @@ const nameEl   = document.querySelector('.name');
 const slideNext= document.querySelector('.slide-next');
 const slidePrev= document.querySelector('.slide-prev');;
 const LS       = window.localStorage;
+const quoteT   = document.querySelector('.quote');
+const quoteA   = document.querySelector('.author');
+const changeQuote = document.querySelector('.change-quote');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
@@ -96,6 +99,7 @@ const getSlidePrev = () => {
   setBg(prevBg);
 };
 
+// Weather widget
 async function getWeather(city) {  
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&appid=c20745821d8e3b80497a536dcc27c903&units=metric`;
   const res = await fetch(url);
@@ -105,6 +109,18 @@ async function getWeather(city) {
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
   temperature.textContent = `${data.main.temp}°C`;
   weatherDescription.textContent = data.weather[0].description;
+}
+
+// Quotes widget
+async function getQuote() {  
+  const quotes = 'quotes.json';
+  const res = await fetch(quotes);
+  const data = await res.json(); 
+  
+  let randomQuoteNum = getRandomInt(0, 60);
+
+  quoteT.textContent = (data[randomQuoteNum].text);
+  quoteA.textContent = (data[randomQuoteNum].author);
 }
 
 
@@ -123,22 +139,33 @@ setInterval(() => {
 // Setiing date(), greeting, loading username 
 window.addEventListener('load', () => {
     nameEl.value = `${LS.getItem('name')}!`
+    
     greetEl.textContent = `Good ${getTimeName()}, `;
     dateEl.textContent = getDate();
     timeEl.textContent = getTimeOfDay();
-    getWeather('Минск');
-    cityEl.value = 'Минск';
+    if (!LS.getItem('city')) {
+      cityEl.value = 'Минск';
+      getWeather('Минск');
+    } else {
+      cityEl.value = LS.getItem('city');
+      getWeather(cityEl.value);
+    }
+    
+   
     setBg(randomNum);
+    getQuote();
+
   }); 
   
 
 // Saving username
 nameEl.addEventListener('input', () => {
-  LS.setItem('name', nameEl.value); 
+  LS.setItem('name', nameEl.value);
 })
 
 cityEl.addEventListener('change', () => {
   getWeather(cityEl.value);
+  LS.setItem('city', cityEl.value)
 })
 
 // Slides switchers
@@ -148,4 +175,8 @@ slideNext.addEventListener('click', () => {
 
 slidePrev.addEventListener('click', () => {
   getSlidePrev();
+})
+
+changeQuote.addEventListener('click', () => {
+  getQuote();
 })
