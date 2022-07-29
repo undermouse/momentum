@@ -1,5 +1,3 @@
-import playList from "./playList";
-
 // constants
 const timeEl   = document.querySelector('.time');
 const dateEl   = document.querySelector('.date');
@@ -15,6 +13,7 @@ const changeQuote = document.querySelector('.change-quote');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
+const playListUl = document.querySelector('.play-list');
 const selectedSong = document.querySelector('.play-item');
 const playPrevBtn = document.querySelector('.play-prev');
 const playNextBtn = document.querySelector('.play-next');
@@ -23,42 +22,58 @@ let isPlay = false;
 let playNum = 0;
 const currentSong = document.querySelector('.play-item');
 
+
+// Audio Player
 const audio = new Audio(); 
+audio.src = playList[playNum].src;
 
 const toggleAudio = () => {
   if (isPlay === false) { 
-    audio.src = playList[playNum].src;
     audio.play();
     audio.currentTime = 0; 
     isPlay = true;
-    currentSong.classList.add('playing');
   } else {
     audio.pause();
     audio.currentTime = 0; 
     isPlay = false;
-    currentSong.classList.remove('playing');
   }
 }
 
-const playNext = () => {
-  playNum += 1;
+playNextBtn.addEventListener('click', () => {
+  audio.pause();
+  if (playNum < playList.length - 1) {
+    playNum += 1;
+  } else {
+    playNum = 1;
+  }
+  audio.src = playList[playNum].src;
   audio.play();
-}
+})
 
-const playPrev = () => {
+
+playPrevBtn.addEventListener('click', () => {
   playNum -= 1;
-  audio.play()
-}
+  audio.play();
+})
 
 playBtn.onclick = () => {
    toggleAudio();
    playBtn.classList.toggle('pause');
 }
 
-currentSong.onclick = () => {
-  currentSong.classList.add('playing')
+import playList from './playList.js';
+
+function createPlayList() {
+        playList.forEach(function (el) {
+            const li = document.createElement('li');
+            li.classList.add('play-item');
+            li.innerHTML = el.title;
+            playListUl.append(li);
+        }
+    )
 }
 
+createPlayList();
 
 // Additional funcs
 const getRandomInt = (min, max) => {
@@ -165,10 +180,15 @@ async function getQuote() {
   const res = await fetch(quotes);
   const data = await res.json(); 
   
-  let randomQuoteNum = getRandomInt(0, 60);
+  let randomQuoteNum = getRandomInt(1, 60);
 
-  quoteT.textContent = (data[randomQuoteNum].text);
-  quoteA.textContent = (data[randomQuoteNum].author);
+  if (quoteT) {
+    quoteT.textContent = (data[randomQuoteNum].text);
+    quoteA.textContent = (data[randomQuoteNum].author);
+  } else {
+    quoteT.textContent = 'Найти достойные цитаты так же сложно, как и работающий API с цитатами';
+    quoteA.textContent = '© undermouse';
+  }
 }
 
 
