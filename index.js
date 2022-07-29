@@ -65,9 +65,13 @@ const setBg = (bgNum) => {
   let timeOfDay = getTimeName();
   let bgUrl = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
   let body = document.getElementById('body');
-
-  body.style.backgroundImage = `url('${bgUrl}')`;
+  const img = new Image();
+  img.src = bgUrl;
+  img.onload = () => {
+    body.style.backgroundImage = `url('${img.src}')`;
+  }
 }
+
 const getSlideNext = () => {
   randomNum = Number(randomNum);
   if (randomNum < 20) {
@@ -109,8 +113,6 @@ window.addEventListener('load', () => {
     dateEl.textContent = getDate();
     timeEl.textContent = getTimeOfDay();
     setBg(randomNum);
-    // FIXME: smooth loading for images: 
-     //https://github.com/rolling-scopes-school/tasks/blob/master/tasks/momentum/momentum-slider.md
   }); 
   
 
