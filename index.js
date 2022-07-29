@@ -6,10 +6,20 @@ const greetEl  = document.querySelector('.greeting');
 const nameEl   = document.querySelector('.name');
 const LS       = window.localStorage;
 
+// Additional funcs
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  let num = Math.floor(Math.random() * (max - min)) + min;
+  if (num < 10) {
+    return String(num).padStart(2, 0);
+  }
+  return String(num);
+} // min 1, max 20
 
 
-// Date & Time getters
-const getTime = () => {
+// Date, Time, greeting funcs
+const getTimeOfDay = () => {
   let now = new Date();
   return now.toLocaleTimeString();
 }
@@ -26,44 +36,54 @@ const getDate = () => {
   return now.toLocaleString("ru-RU", options);
 }
 
-const setGreeting = () => {
+const getTimeName = () => {
   let now = new Date();
   let h = now.getHours();
   let m = now.getMinutes();
-  let properGreeting = '';
+  let timeName = '';
 
   if (h > 6 && h < 12 && m < 59) {
-    properGreeting = 'Goog morning';
+    timeName = 'morning';
   } else if (h > 12 && h < 17 && m < 59) {
-    properGreeting = 'Good afternoon';
+    timeName = 'afternoon';
   } else if (h > 18 && h < 25 && m < 59) {
-    properGreeting = 'Good evening';
+    timeName = 'evening';
   } else if (h > 0 && h < 6 && m < 59) {
-    properGreeting = 'Good night';
+    timeName = 'night';
   } 
 
-  return properGreeting;
+  return timeName;
 }
 
+// Background 
+const setBg = () => {
+  let timeOfDay = getTimeName();
+  let bgNum = getRandomInt(1, 20);
+  let bgUrl = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
+  let body = document.getElementById('body');
 
+  body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg')`;
+}
 
 
 
 // Time every second
 setInterval(() => {
-  timeEl.textContent = getTime();
+  timeEl.textContent = getTimeOfDay();
 }, 1000);
 
 // Setting proper time-of-day greeting every minute
 setInterval(() => {
-  greetEl.textContent = setGreeting();
+  greetEl.textContent = `Good ${getTimeName()}, `;
 }, 60000);
 
 // Setiing date(), greeting, loading username 
 window.addEventListener('load', () => {
-    nameEl.value = LS.getItem('name')
-    greetEl.textContent = setGreeting();
+    nameEl.value = `${LS.getItem('name')}!`
+    greetEl.textContent = `Good ${getTimeName()}, `;
     dateEl.textContent = getDate();
+    timeEl.textContent = getTimeOfDay();
+    setBg();
 })
 
 // Saving username
