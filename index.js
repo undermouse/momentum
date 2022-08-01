@@ -1,24 +1,31 @@
 // constants
+const settings = document.querySelector('.settings-ico');
+const settPopup = document.querySelector('.settings-popup');
+const settListItem = document.querySelectorAll('.settings-list-item');
 const flag = document.querySelector('.flag');
 const timeEl   = document.querySelector('.time');
 const dateEl   = document.querySelector('.date');
 const cityEl   = document.querySelector('.city');
 const greetEl  = document.querySelector('.greeting');
+const greetCont  = document.querySelector('.greeting-container');
 const nameEl   = document.querySelector('.name');
 const slideNext= document.querySelector('.slide-next');
 const slidePrev= document.querySelector('.slide-prev');;
 const LS       = window.localStorage;
 const quoteT   = document.querySelector('.quote');
 const quoteA   = document.querySelector('.author');
+const weather = document.querySelector('.weather');
 const changeQuote = document.querySelector('.change-quote');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
+const player = document.querySelector('.player');
 const playListUl = document.querySelector('.play-list');
 const selectedSong = document.querySelector('.play-item');
 const playPrevBtn = document.querySelector('.play-prev');
 const playNextBtn = document.querySelector('.play-next');
 const playBtn  = document.getElementById('play-btn');
+const footerCont = document.querySelector('.footer-container');
 let isPlay = false;
 let playNum = 0;
 
@@ -273,6 +280,57 @@ async function getQuote(lang) {
   quoteT.textContent = (data[randomQuoteNum].text);
   quoteA.textContent = (data[randomQuoteNum].author);
   
+}
+
+// Settings
+
+let isVisible = false;
+settings.onclick = () => {
+  setSettingsLang(userLang);
+  if (!isVisible) {
+    settPopup.classList.remove('transparent');
+    settPopup.classList.add('visible');
+    isVisible = true;
+  } else {
+    settPopup.classList.remove('visible');
+    settPopup.classList.add('transparent');
+    isVisible = false;
+  }
+}
+
+let blockVisible = true;
+settListItem.forEach((el) => {
+  el.onclick = () => {
+    let blockToHide = document.getElementById(el.id);
+
+
+    if (blockVisible) {
+
+      blockToHide.classList.remove('visible');
+      blockToHide.classList.add('transparent')
+      blockVisible = false;
+
+    } else {
+
+      blockToHide.classList.remove('transparent');
+      blockToHide.classList.add('visible')
+      blockVisible = true;
+    }
+
+
+  }
+})
+
+const setSettingsLang = (lang) => {
+
+  if (lang === 'ru') {
+    document.querySelector('#settHead').textContent = 'Клик - скрыть';
+    document.querySelector('#playerText').textContent = 'Плеер';
+    document.querySelector('#weatherText').textContent = 'Погода';
+    document.querySelector('#clockText').textContent = 'Часы';
+    document.querySelector('#dateText').textContent = 'Дата';
+    document.querySelector('#greetingText').textContent = 'Приветствие';
+  }
 }
 
 

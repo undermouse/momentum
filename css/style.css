@@ -315,6 +315,90 @@ body {
   transition: all .3s;
 }
 
+.footer-container {
+  display: flex;
+  flex-direction: row;
+}
 
+.settings {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  background-image: "../assets/svg/settings/settings.svg";
+}
+
+
+.settings-ico {
+ filter: invert();
+ cursor: pointer;
+}
+
+.settings-ico:hover {
+  transform: scale(1.06);
+  transition: all .4s linear;
+}
+
+.settings-ico:not(hover) {
+  transition: all .3s;
+}
+
+.settings-popup {
+  position: absolute;
+  left: 15px;
+  width: auto;
+  height: auto;
+  bottom: 50px;
+  background-color: rgba(15, 15, 15, 0.7);
+  border: 1px solid #fff ;
+  border-radius: 15px;
+  
+}
+
+.settings-popup > h2 {
+  text-align: center;
+  padding: 5px 15px;
+}
+
+.settings-list {
+  padding: 10px 15px;
+  list-style: none;
+  text-align: left;
+  font-size: 20px;
+}
+
+.settings-list-item {
+  padding-bottom: 10px;
+  display: flex;
+}
+
+.settings-list-item:hover {
+  transition: all .3s;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.settings-list-item:not(hover) {
+  transition: all .3s;
+  transform: scale(1);
+}
+
+.ico {
+ width: 30px;
+ height: 30px;
+ position: relative;
+ margin-right: 15px;
+}
+
+.transparent {
+  transition: all .9s;
+  opacity: 0;
+}
+
+.visible {
+  transition: all .9s;
+  opacity: 1;
+}
 
 
