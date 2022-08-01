@@ -287,3 +287,34 @@ body {
     padding: 5px;
   }
 }
+
+.flag {
+  width: 40px;
+  height: 40px;
+  margin: -10px 0 0 10px;
+  position: relative;
+}
+
+.flag-en {
+  background: url('../assets/svg/en.svg');
+
+}
+
+.flag-ru {
+  background: url('../assets/svg/ru.svg');
+}
+
+.flag:hover {
+  transform: scale(1.1);
+  transition: all .3s;
+  cursor: pointer;
+}
+
+
+.flag:not(hover) {
+  transition: all .3s;
+}
+
+
+
+

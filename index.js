@@ -1,4 +1,5 @@
 // constants
+const flag = document.querySelector('.flag');
 const timeEl   = document.querySelector('.time');
 const dateEl   = document.querySelector('.date');
 const cityEl   = document.querySelector('.city');
@@ -20,7 +21,64 @@ const playNextBtn = document.querySelector('.play-next');
 const playBtn  = document.getElementById('play-btn');
 let isPlay = false;
 let playNum = 0;
-const currentSong = document.querySelector('.play-item');
+
+// Base 
+const getUserLang = () => { 
+  let navLang = navigator.language.slice(0, 2);
+  return navLang;
+}
+
+const checkLangInLocalStorage = () => {
+  let userLang = '';
+  if (LS.getItem('lang') !== null) {
+    userLang = LS.getItem('lang');
+  } else {
+    userLang = getUserLang();
+  };
+  return userLang;
+}
+
+let userLang = checkLangInLocalStorage();
+
+const setUserFlag = (lang) => {
+  if (lang === 'ru') {
+    flag.classList.remove('flag-en');
+    flag.classList.add('flag-ru');
+    LS.setItem('lang', 'ru');
+  } else if (lang === 'en') {
+    flag.classList.remove('flag-ru');
+    flag.classList.add('flag-en');
+    LS.setItem('lang', 'en');
+  }
+}
+
+setUserFlag(userLang)
+
+flag.onclick = () => {
+  if (userLang === 'en') {
+    userLang = 'ru';
+    flag.classList.remove('flag-en');
+    flag.classList.add('flag-ru');
+    LS.setItem('lang', 'ru');
+    if (!LS.getItem('city')) {
+      LS.setItem('city', 'Washington');
+    }
+    getWeather(cityEl.value);
+    getQuote(userLang);
+    dateEl.textContent = getDate();
+    greetEl.textContent = setGreeting();
+
+  } else if (userLang === 'ru') {
+    userLang = 'en';
+    flag.classList.remove('flag-ru');
+    flag.classList.add('flag-en');
+    LS.setItem('lang', 'en');
+    getWeather(cityEl.value);
+    getQuote(userLang);
+    dateEl.textContent = getDate();
+    greetEl.textContent = setGreeting();
+  }
+}
 
 
 // Audio Player
@@ -104,7 +162,11 @@ const getDate = () => {
     weekday: 'long',
   };
   
-  return now.toLocaleString("ru-RU", options);
+  if (userLang === 'ru') {
+    return now.toLocaleString("ru-RU", options);
+  } else {
+    return now.toLocaleString("en-US", options);
+  }
 }
 
 const getTimeName = () => {
@@ -124,6 +186,29 @@ const getTimeName = () => {
   } 
   
   return timeName;
+}
+
+const setGreeting = () => {
+
+  const greet = getTimeName();
+  if (userLang === 'ru') {
+    switch (greet) {
+      case 'morning':
+        return 'Доброе утро, '
+        break;
+      case 'afternoon':
+        return 'Добрый день, '
+        break;
+      case 'evening':
+        return 'Добрый вечер, '
+        break;
+      case 'night':
+        return 'Доброй ночи, '
+        break;
+    }
+  } else {
+    return `Good ${greet}, `
+  }
 }
 
 
@@ -164,7 +249,8 @@ const getSlidePrev = () => {
 
 // Weather widget
 async function getWeather(city) {  
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=ru&appid=c20745821d8e3b80497a536dcc27c903&units=metric`;
+  const lang = userLang;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=c20745821d8e3b80497a536dcc27c903&units=metric`;
   const res = await fetch(url);
   const data = await res.json(); 
   
@@ -175,20 +261,18 @@ async function getWeather(city) {
 }
 
 // Quotes widget
-async function getQuote() {  
-  const quotes = 'quotes.json';
+async function getQuote(lang) {  
+  const quotes = `./quotes/quotes_${lang}.json`;
+  
   const res = await fetch(quotes);
   const data = await res.json(); 
   
-  let randomQuoteNum = getRandomInt(1, 60);
+  let randomQuoteNum = Number(getRandomInt(1, data.length));
+  
 
-  if (quoteT) {
-    quoteT.textContent = (data[randomQuoteNum].text);
-    quoteA.textContent = (data[randomQuoteNum].author);
-  } else {
-    quoteT.textContent = 'Найти достойные цитаты так же сложно, как и работающий API с цитатами';
-    quoteA.textContent = '© undermouse';
-  }
+  quoteT.textContent = (data[randomQuoteNum].text);
+  quoteA.textContent = (data[randomQuoteNum].author);
+  
 }
 
 
@@ -201,14 +285,13 @@ setInterval(() => {
 
 // Setting proper time-of-day greeting every minute
 setInterval(() => {
-  greetEl.textContent = `Good ${getTimeName()}, `;
+  greetEl.textContent = setGreeting();
 }, 60000);
 
 // Setiing date(), greeting, loading username 
 window.addEventListener('load', () => {
     nameEl.value = `${LS.getItem('name')}!`
-    
-    greetEl.textContent = `Good ${getTimeName()}, `;
+    greetEl.textContent = setGreeting();
     dateEl.textContent = getDate();
     timeEl.textContent = getTimeOfDay();
     if (!LS.getItem('city')) {
@@ -219,9 +302,8 @@ window.addEventListener('load', () => {
       getWeather(cityEl.value);
     }
     
-   
     setBg(randomNum);
-    getQuote();
+    getQuote(userLang);
 
   }); 
   
@@ -246,5 +328,5 @@ slidePrev.addEventListener('click', () => {
 })
 
 changeQuote.addEventListener('click', () => {
-  getQuote();
+  getQuote(userLang);
 })
