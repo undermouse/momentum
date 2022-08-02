@@ -9,6 +9,8 @@
   padding: 0;
 }
 
+
+
 body {
   min-width: 480px;
   min-height: 100vh;
@@ -420,9 +422,17 @@ body {
   text-decoration: line-through;
 }
 
-.imgTemp {
-  width: 500px;
-  height: 700px;
-  background-color: rgba(15, 15, 15, 0.7);
-  position: absolute;
+.tags {
+  line-height: 1.7rem;
+  margin-top: 5px;
+  padding: 3px 7px;
+  font-size: 0.9rem;
+  font-stretch: expanded;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.nodisplay {
+  display: none;
 }

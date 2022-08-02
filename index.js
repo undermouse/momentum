@@ -26,6 +26,8 @@ const playPrevBtn = document.querySelector('.play-prev');
 const playNextBtn = document.querySelector('.play-next');
 const playBtn  = document.getElementById('play-btn');
 const footerCont = document.querySelector('.footer-container');
+const photoRadio = document.getElementById('photo-radio');
+const apiTags = document.querySelector('.tags');
 let isPlay = false;
 let playNum = 0;
 let photoSource = 'github-radio';
@@ -224,6 +226,14 @@ const setGreeting = () => {
 
 
 // Background 
+if (LS.getItem('tags') !== null) {
+  apiTags.value = LS.getItem('tags');
+}
+
+apiTags.onchange = () => {
+  LS.setItem('tags', apiTags.value);
+}
+
 const setBg = (bgNum) => {
 
   if (photoSource === 'github-radio') {
@@ -242,35 +252,58 @@ const setBg = (bgNum) => {
 }
 
 const setBgFromApi = () => {
-  const img = new Image();
-    let bgUrl = `https://source.unsplash.com/1600x900/?nature,water`;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let tags = apiTags.value;
+
+    const img = new Image();
+    let bgUrl = `https://source.unsplash.com/random/${width}x${height}/?${tags}`;
+    console.log(bgUrl);
+
     img.src = bgUrl;
     img.onload = () => {
       body.style.backgroundImage = `url('${img.src}')`;
     }
 }
+// Slides switchers
+slideNext.addEventListener('click', () => {
+  getSlideNext();
+})
+
+slidePrev.addEventListener('click', () => {
+  getSlidePrev();
+})
 
 const getSlideNext = () => {
-  randomNum = Number(randomNum);
-  if (randomNum < 20) {
-    randomNum += 1;
+  if (photoSource === 'github-radio') {
+    randomNum = Number(randomNum);
+    if (randomNum < 20) {
+      randomNum += 1;
+    } else {
+      randomNum = 1;
+    }
+    let nextBg = String(randomNum).padStart(2, 0);
+    setBg(nextBg);
   } else {
-    randomNum = 1;
+    setBgFromApi(1);
   }
-  let nextBg = String(randomNum).padStart(2, 0);
-  setBg(nextBg);
 };
 
 const getSlidePrev = () => {
-  randomNum = Number(randomNum);
-  if (randomNum > 1) {
-    randomNum -= 1;
+  if (photoSource === 'github-radio') {
+    randomNum = Number(randomNum);
+    if (randomNum > 1) {
+      randomNum -= 1;
+    } else {
+      randomNum = 20;
+    }
+    let prevBg = String(randomNum).padStart(2, 0);
+    setBg(prevBg);
   } else {
-    randomNum = 20;
+    setBgFromApi(1);
   }
-  let prevBg = String(randomNum).padStart(2, 0);
-  setBg(prevBg);
-};
+}
 
 // Weather widget
 async function getWeather(city) {  
@@ -318,12 +351,14 @@ let isVisible = false;
 settings.onclick = () => {
   setSettingsLang(userLang);
   if (!isVisible) {
+    settPopup.classList.remove('nodisplay');
     settPopup.classList.remove('transparent');
     settPopup.classList.add('visible');
     isVisible = true;
   } else {
     settPopup.classList.remove('visible');
     settPopup.classList.add('transparent');
+    settPopup.classList.add('nodisplay');
     isVisible = false;
   }
 }
@@ -331,14 +366,17 @@ settings.onclick = () => {
 document.querySelector('.main').onclick = () => {
   settPopup.classList.remove('visible');
   settPopup.classList.add('transparent');
+  settPopup.classList.add('nodisplay');
 } 
 document.querySelector('.header').onclick = () => {
   settPopup.classList.remove('visible');
   settPopup.classList.add('transparent');
+  settPopup.classList.add('nodisplay');
 }
 document.querySelector('.footer').onclick = () => {
   settPopup.classList.remove('visible');
   settPopup.classList.add('transparent');
+  settPopup.classList.add('nodisplay');
 }
 
 
@@ -385,11 +423,19 @@ const setSettingsLang = (lang) => {
   }
 }
 
-const photoRadio = document.getElementById('photo-radio');
+
 photoRadio.onchange = (e) => {
   photoSource = e.target.id;
-
+  
+  if (e.target.id === 'api-radio') {
+    apiTags.disabled = false;
+  } else {
+    apiTags.disabled = true;
+  }
   setBg(randomNum);
+
+  console.log(LS);
+  
 }
 
 
@@ -437,14 +483,7 @@ cityEl.addEventListener('change', () => {
   LS.setItem('city', cityEl.value)
 })
 
-// Slides switchers
-slideNext.addEventListener('click', () => {
-  getSlideNext();
-})
 
-slidePrev.addEventListener('click', () => {
-  getSlidePrev();
-})
 
 changeQuote.addEventListener('click', () => {
   getQuote(userLang);
