@@ -436,3 +436,51 @@ body {
 .nodisplay {
   display: none;
 }
+
+.main-goal-container {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: space-between;
+ margin-bottom: 25px;
+}
+
+.mg-heading {
+  font-family: 'Roboto', sans-serif;
+  padding: 0 0 20px;
+  
+}
+
+.goal-col {
+  display: flex;
+  gap: 20px;
+}
+
+.main-goal-input {
+  line-height: 1.7rem;
+  min-width: 450px;
+  max-width: 50vw;
+
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 1.8);
+  background: none;
+  outline: none;
+  font-size: 1.7rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: #fff;
+}
+
+.mg-reset {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.mg-reset:hover {
+  transform: scale(1.1);
+  transition: linear .3s;
+}
+.mg-reset:not(hover) {
+  transform: scale(1);
+  transition: linear .3s;;
+}

@@ -28,6 +28,14 @@ const playBtn  = document.getElementById('play-btn');
 const footerCont = document.querySelector('.footer-container');
 const photoRadio = document.getElementById('photo-radio');
 const apiTags = document.querySelector('.tags');
+const mainGoalContainer = document.querySelector('.main-goal-container');
+const mainGoalInput = document.querySelector('.main-goal-input');
+const mainGoalReset = document.querySelector('.mg-reset');
+const mainGoalHeader = document.querySelector('.mg-heading');
+const secretHeading = document.querySelector('.secret-heading');
+
+
+
 let isPlay = false;
 let playNum = 0;
 let photoSource = 'github-radio';
@@ -79,6 +87,7 @@ flag.onclick = () => {
     }
     getWeather(cityEl.value);
     getQuote(userLang);
+    setMainGoal();
     dateEl.textContent = getDate();
     greetEl.textContent = setGreeting();
 
@@ -89,6 +98,7 @@ flag.onclick = () => {
     LS.setItem('lang', 'en');
     getWeather(cityEl.value);
     getQuote(userLang);
+    setMainGoal();
     dateEl.textContent = getDate();
     greetEl.textContent = setGreeting();
   }
@@ -492,3 +502,67 @@ cityEl.addEventListener('change', () => {
 changeQuote.addEventListener('click', () => {
   getQuote(userLang);
 })
+
+//ToDo widget 
+
+if (LS.getItem('maingoal')) {
+  mainGoalInput.value = LS.getItem('maingoal');
+
+  let val = mainGoalInput.value;
+  mainGoalInput.classList.add('nodisplay');
+  secretHeading.classList.remove('nodisplay');
+  secretHeading.textContent = val;
+
+  if (userLang === 'ru') {
+    mainGoalHeader.textContent = 'СЕГОДНЯ';
+  } else if (userLang === 'en') {
+    mainGoalHeader.textContent = 'TODAY';
+  }
+}
+
+const setMainGoal = () => {
+  if (userLang === 'ru') {
+    mainGoalHeader.textContent = 'Твоя главная цель на сегодня';
+  } else if (userLang === 'en') {
+    mainGoalHeader.textContent = 'Your main goal for today';
+  }
+}
+
+setMainGoal();
+
+
+
+mainGoalInput.onchange = () => {
+  LS.setItem('maingoal', mainGoalInput.value);
+  
+  if (userLang === 'ru') {
+    mainGoalHeader.textContent = 'СЕГОДНЯ';
+  } else if (userLang === 'en') {
+    mainGoalHeader.textContent = 'TODAY';
+  }
+
+  let val = mainGoalInput.value;
+  mainGoalInput.classList.add('nodisplay');
+  secretHeading.classList.remove('nodisplay');
+  secretHeading.textContent = val;
+  
+}
+
+
+mainGoalReset.onclick = () => {
+  if (userLang === 'ru') {
+    mainGoalHeader.textContent = 'Твоя главная цель на сегодня';
+    LS.removeItem('maingoal');
+    mainGoalInput.classList.remove('nodisplay');
+    secretHeading.classList.add('nodisplay');
+  } else if (userLang === 'en') {
+    mainGoalHeader.textContent = 'Your main goal for today';
+    LS.removeItem('maingoal');
+    mainGoalInput.classList.remove('nodisplay');
+    secretHeading.classList.add('nodisplay');
+  }
+  mainGoalInput.value = '';
+}
+
+
+
