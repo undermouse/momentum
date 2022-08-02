@@ -251,20 +251,24 @@ const setBg = (bgNum) => {
 
 }
 
-const setBgFromApi = () => {
+const setBgFromApi = (offset) => {
 
+    let timeOfDay = getTimeName();
     let width = window.innerWidth;
     let height = window.innerHeight;
     let tags = apiTags.value;
 
     const img = new Image();
-    let bgUrl = `https://source.unsplash.com/random/${width}x${height}/?${tags}`;
+    let bgUrl = `https://source.unsplash.com/random/${width}x${height}/?${tags},${timeOfDay}`;
     console.log(bgUrl);
 
     img.src = bgUrl;
     img.onload = () => {
       body.style.backgroundImage = `url('${img.src}')`;
     }
+
+    console.log(bgUrl);
+    
 }
 // Slides switchers
 slideNext.addEventListener('click', () => {
