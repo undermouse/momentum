@@ -406,3 +406,23 @@ body {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+.photo-radio {
+  border: none;
+  padding: 10px 0 15px 0;
+}
+
+.radio {
+  margin-bottom: 15px;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.imgTemp {
+  width: 500px;
+  height: 700px;
+  background-color: rgba(15, 15, 15, 0.7);
+  position: absolute;
+}

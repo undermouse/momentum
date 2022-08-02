@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="assets/favicon.ico" rel="shortcut icon" />
-  <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
   <link rel="stylesheet" href="css/owfont-regular.css" />
   <link rel="stylesheet" href="css/style.css" />
   <title>momentum</title>
@@ -58,7 +57,19 @@
         <hr class="photoHr">
         <div class="photo-source">
           <h3 id="photo-heading">Photo source</h3>
-          <button type="radio"></button>
+          
+          <fieldset id="photo-radio" class="photo-radio">
+            <div>
+              <input class="radio" type="radio" id="github-radio" name="source" value="github" checked>
+              <label for="github-radio">GitHub</label>
+            </div>
+          
+            <div>
+              <input class="radio"  type="radio" id="api-radio" name="source" value="api">
+              <label for="api-radio">Unsplash API</label>
+            </div>
+          </fieldset>
+        
         </div>
       </ul>
     </div>
@@ -73,6 +84,8 @@
         <div class="author"></div>
       </div>
     </div>
+    <button onclick="showRandImg()"></button>
+    <div class="imgTemp"></div>
   </footer>
   <script type="module" src="./index.js"></script>
   

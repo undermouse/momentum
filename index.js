@@ -87,7 +87,7 @@ flag.onclick = () => {
   }
 }
 
-
+import playList from "./playList.js";
 // Audio Player
 const audio = new Audio(); 
 audio.src = playList[playNum].src;
@@ -125,8 +125,6 @@ playBtn.onclick = () => {
    toggleAudio();
    playBtn.classList.toggle('pause');
 }
-
-import playList from './playList.js';
 
 function createPlayList() {
         playList.forEach(function (el) {
@@ -283,6 +281,18 @@ async function getQuote(lang) {
 }
 
 // Settings
+const loadOnlyVisibleStuff = () => {
+  console.log(LS);
+  
+  settListItem.forEach((el) => {
+    let blockToHide = document.getElementById(el.id);
+    if (LS.getItem(`${el.id}`) !== null) {
+      blockToHide.classList.remove('visible');
+      blockToHide.classList.add('transparent');
+      el.classList.add('line-through');
+    };
+  })
+}
 
 let isVisible = false;
 settings.onclick = () => {
@@ -298,6 +308,21 @@ settings.onclick = () => {
   }
 }
 
+document.querySelector('.main').onclick = () => {
+  settPopup.classList.remove('visible');
+  settPopup.classList.add('transparent');
+} 
+document.querySelector('.header').onclick = () => {
+  settPopup.classList.remove('visible');
+  settPopup.classList.add('transparent');
+}
+document.querySelector('.footer').onclick = () => {
+  settPopup.classList.remove('visible');
+  settPopup.classList.add('transparent');
+}
+
+
+
 let blockVisible = true;
 settListItem.forEach((el) => {
   el.onclick = () => {
@@ -308,18 +333,24 @@ settListItem.forEach((el) => {
 
       blockToHide.classList.remove('visible');
       blockToHide.classList.add('transparent')
+      el.classList.add('line-through');
+      LS.setItem(`${el.id}`, 'hidden');
       blockVisible = false;
 
     } else {
 
       blockToHide.classList.remove('transparent');
       blockToHide.classList.add('visible')
+      el.classList.remove('line-through');
+      LS.removeItem(`${el.id}`, 'hidden');
       blockVisible = true;
-    }
-
-
+    }  
+    console.log(LS) 
   }
+
 })
+
+
 
 const setSettingsLang = (lang) => {
 
@@ -330,7 +361,14 @@ const setSettingsLang = (lang) => {
     document.querySelector('#clockText').textContent = 'Часы';
     document.querySelector('#dateText').textContent = 'Дата';
     document.querySelector('#greetingText').textContent = 'Приветствие';
+    document.querySelector('#photo-heading').textContent = 'Источник обоев';
   }
+}
+
+const photoRadio = document.getElementById('photo-radio');
+photoRadio.onchange = (e) => {
+  console.log(e.target.id);
+  
 }
 
 
@@ -363,6 +401,8 @@ window.addEventListener('load', () => {
     setBg(randomNum);
     getQuote(userLang);
 
+    loadOnlyVisibleStuff();
+
   }); 
   
 
@@ -388,3 +428,11 @@ slidePrev.addEventListener('click', () => {
 changeQuote.addEventListener('click', () => {
   getQuote(userLang);
 })
+
+const showRandImg = () => {
+  let imgDiv = document.querySelector('.imgTemp');
+  tempUrl = "https://source.unsplash.com/random/800x600";
+  let template = '';
+  template += `<div><img src="${tempUrl}"></div>`;
+  imgDiv.innerHTML = template;
+}
