@@ -28,6 +28,11 @@ const playBtn  = document.getElementById('play-btn');
 const footerCont = document.querySelector('.footer-container');
 let isPlay = false;
 let playNum = 0;
+let photoSource = 'github-radio';
+let photoSourceRadio = document.querySelector('#photo-radio');
+photoSourceRadio.onchange = (e) => {
+  photoSource = e;
+} 
 
 // Base 
 const getUserLang = () => { 
@@ -220,14 +225,29 @@ const setGreeting = () => {
 
 // Background 
 const setBg = (bgNum) => {
-  let timeOfDay = getTimeName();
-  let bgUrl = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
-  let body = document.getElementById('body');
-  const img = new Image();
-  img.src = bgUrl;
-  img.onload = () => {
-    body.style.backgroundImage = `url('${img.src}')`;
+
+  if (photoSource === 'github-radio') {
+    let timeOfDay = getTimeName();
+    let bgUrl = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
+    let body = document.getElementById('body');
+    const img = new Image();
+    img.src = bgUrl;
+    img.onload = () => {
+      body.style.backgroundImage = `url('${img.src}')`;
+    }
+  } else if (photoSource === 'api-radio') {
+    setBgFromApi();
   }
+
+}
+
+const setBgFromApi = () => {
+  const img = new Image();
+    let bgUrl = `https://source.unsplash.com/1600x900/?nature,water`;
+    img.src = bgUrl;
+    img.onload = () => {
+      body.style.backgroundImage = `url('${img.src}')`;
+    }
 }
 
 const getSlideNext = () => {
@@ -367,8 +387,9 @@ const setSettingsLang = (lang) => {
 
 const photoRadio = document.getElementById('photo-radio');
 photoRadio.onchange = (e) => {
-  console.log(e.target.id);
-  
+  photoSource = e.target.id;
+
+  setBg(randomNum);
 }
 
 
@@ -428,11 +449,3 @@ slidePrev.addEventListener('click', () => {
 changeQuote.addEventListener('click', () => {
   getQuote(userLang);
 })
-
-const showRandImg = () => {
-  let imgDiv = document.querySelector('.imgTemp');
-  tempUrl = "https://source.unsplash.com/random/800x600";
-  let template = '';
-  template += `<div><img src="${tempUrl}"></div>`;
-  imgDiv.innerHTML = template;
-}
