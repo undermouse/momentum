@@ -676,3 +676,8 @@ body {
  
   width: auto;
 }
+
+.now-playing {
+  text-shadow: 2px 2px 2px 2px dodgerblue;
+  color: dodgerblue;
+}

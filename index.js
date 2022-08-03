@@ -128,7 +128,12 @@ const toggleAudio = () => {
     isPlay = true;
     musicLength.textContent = playList[playNum].duration;
     musicName.textContent = playList[playNum].title;
+
+    if (playListUl.children[playNum].innerText === playList[playNum].title) {
+      playListUl.children[playNum].classList.add('now-playing') 
+    }
     
+
   } else {
     audio.pause();
     audio.currentTime = 0; 
@@ -137,36 +142,50 @@ const toggleAudio = () => {
 }
 
 playBtn.onclick = () => {
-  
-  
+  toggleAudio();
+  playBtn.classList.toggle('pause');
 }
-
 
 playNextBtn.addEventListener('click', () => {
   audio.pause();
   if (playNum < playList.length - 1) {
     playNum += 1;
   } else {
-    playNum = 1;
+    playNum = 0;
   }
   audio.src = playList[playNum].src;
   musicLength.textContent = playList[playNum].duration;
   musicName.textContent = playList[playNum].title;
+  for (let i = 0; i < playListUl.children.length; i++) {
+    playListUl.children[i].classList.remove('now-playing')
+  }
+  if (playListUl.children[playNum].innerText === playList[playNum].title) {
+    playListUl.children[playNum].classList.add('now-playing');
+  }
   audio.play();
 })
 
 
 playPrevBtn.addEventListener('click', () => {
-  playNum -= 1;
-  audio.play();
+  audio.pause();
+  if (playNum > 0) {
+    playNum -= 1;
+  } else {
+    playNum = playList.length - 1;
+  }
+  audio.src = playList[playNum].src;
   musicLength.textContent = playList[playNum].duration;
   musicName.textContent = playList[playNum].title;
+  for (let i = 0; i < playListUl.children.length; i++) {
+    playListUl.children[i].classList.remove('now-playing')
+  }
+  if (playListUl.children[playNum].innerText === playList[playNum].title) {
+    playListUl.children[playNum].classList.add('now-playing')
+  }
+  audio.play();
+  
 })
 
-playBtn.onclick = () => {
-   toggleAudio();
-   playBtn.classList.toggle('pause');
-}
 
 function createPlayList() {
         playList.forEach(function (el) {
@@ -174,6 +193,7 @@ function createPlayList() {
             li.classList.add('play-item');
             li.innerHTML = el.title;
             playListUl.append(li);
+            
         }
     )
 }
