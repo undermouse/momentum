@@ -52,6 +52,8 @@ body {
   opacity: .8;
   cursor: pointer;
   transition: .3s;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .playing {
@@ -132,6 +134,8 @@ body {
   width: 180px;
   min-height: 180px;  
   text-align: left;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .weather-error {
@@ -161,6 +165,8 @@ body {
   outline: 0;
   border-bottom: 1px solid #fff;
   background-color: transparent;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .city::placeholder {  
@@ -204,12 +210,16 @@ body {
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px; 
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .date {
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .greeting-container {
@@ -220,6 +230,8 @@ body {
   min-height: 48px;
   width: 100vw;
   font-size: 40px;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .greeting {
@@ -238,6 +250,8 @@ body {
   background-color: transparent;
   border: 0;
   outline: 0;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .name::placeholder {
@@ -263,10 +277,14 @@ body {
 
 .quote {
   min-height: 32px;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .author {
   min-height: 20px;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 @media (max-width: 768px) {
@@ -323,26 +341,30 @@ body {
 }
 
 .settings {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   position: absolute;
   bottom: 10px;
   left: 15px;
-  background-image: "../assets/svg/settings/settings.svg";
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 
 .settings-ico {
- filter: invert();
  cursor: pointer;
+ opacity: .65;
 }
 
 .settings-ico:hover {
   transform: scale(1.06);
+  opacity: 1;
   transition: all .4s linear;
+
 }
 
 .settings-ico:not(hover) {
+  opacity: .65;
   transition: all .3s;
 }
 
@@ -355,6 +377,8 @@ body {
   background-color: rgba(15, 15, 15, 0.7);
   border: 1px solid #fff ;
   border-radius: 15px;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
   
 }
 
@@ -448,7 +472,8 @@ body {
 .mg-heading {
   font-family: 'Roboto', sans-serif;
   padding: 0 0 20px;
-  
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .goal-col {
@@ -469,6 +494,13 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   color: #fff;
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
+}
+
+.secret-heading {
+  text-shadow: 
+    1px 1px 1px rgb(2, 2, 2);
 }
 
 .mg-reset {
