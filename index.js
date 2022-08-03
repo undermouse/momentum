@@ -329,9 +329,10 @@ async function getWeather(city) {
 
   
   if (data.cod === "404") {
-    weatherError.classList.remove('transparent');
-    weatherError.classList.add('visible');
     weatherError.textContent = 'Error 404: not found'
+  } else {
+    weatherError.classList.remove('visible');
+    weatherError.classList.add('transparent');
   }
   
   weatherIcon.className = 'weather-icon owf';
