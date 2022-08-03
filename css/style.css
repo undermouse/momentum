@@ -140,6 +140,8 @@ body {
 
 .weather-error {
   margin-top: -10px;
+  text-shadow: 
+    1px 1px 1px rgb(255, 0, 0);
 }
 
 .description-container {

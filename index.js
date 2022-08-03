@@ -18,6 +18,7 @@ const weather = document.querySelector('.weather');
 const changeQuote = document.querySelector('.change-quote');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
+const weatherError = document.querySelector('.weather-error');
 const wind = document.querySelector('.wind');
 const humidity = document.querySelector('.humidity');
 const weatherDescription = document.querySelector('.weather-description');
@@ -325,6 +326,13 @@ async function getWeather(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=${lang}&appid=c20745821d8e3b80497a536dcc27c903&units=metric`;
   const res = await fetch(url);
   const data = await res.json(); 
+
+  
+  if (data.cod === "404") {
+    weatherError.classList.remove('transparent');
+    weatherError.classList.add('visible');
+    weatherError.textContent = 'Error 404: not found'
+  }
   
   weatherIcon.className = 'weather-icon owf';
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
