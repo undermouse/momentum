@@ -691,12 +691,50 @@ body {
   margin: 0 2px;
 }
 
-.music-name {
-
-  width: auto;
-}
 
 .now-playing {
   text-shadow: 2px 2px 2px 2px dodgerblue;
   color: dodgerblue;
+}
+
+@media screen and (max-width: 480px) {
+
+}
+
+
+@media screen and (max-width: 320px) {
+  .music-name {
+    display: none; 
+  }
+
+  .current, .divider, .length {
+    display: none;
+  }
+
+  .music-name {
+    display: none;
+  }
+
+  .player {
+    width: auto;
+  }
+
+  .greeting, .name {
+    font-size: 1.8rem;
+    word-wrap: nowrap;
+  }
+
+  .main-goal-input {
+    min-width: 300px;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-items: centers;
+    justify-content: space-between;
+  }
+
+ 
+  
 }
