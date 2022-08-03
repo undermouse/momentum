@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'Arial-MT';
-  src: url("../assets/fonts/Arial-MT.woff"); /* Путь к файлу со шрифтом */
- }
+  src: url("../assets/fonts/Arial-MT.woff");
+  /* Путь к файлу со шрифтом */
+}
 
 * {
   box-sizing: border-box;
@@ -28,7 +29,7 @@ body {
   align-items: flex-start;
   width: 100%;
   height: 30vh;
-  min-height: 220px;  
+  min-height: 220px;
   padding: 20px;
 }
 
@@ -52,7 +53,7 @@ body {
   opacity: .8;
   cursor: pointer;
   transition: .3s;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
@@ -65,7 +66,7 @@ body {
 }
 
 .play-item::before {
-  content: "\2713";  
+  content: "\2713";
   position: absolute;
   left: 0;
   top: 2px;
@@ -89,7 +90,7 @@ body {
   outline: 0;
   opacity: .8;
   cursor: pointer;
-  transition: .3s;  
+  transition: .3s;
 }
 
 .player-icon:hover,
@@ -102,7 +103,7 @@ body {
 .slider-icon:active,
 .change-quote:active {
   border: 0;
-  outline: 0;  
+  outline: 0;
   transform: scale(1.1);
 }
 
@@ -132,15 +133,15 @@ body {
   align-items: flex-start;
   row-gap: 5px;
   width: 180px;
-  min-height: 180px;  
+  min-height: 180px;
   text-align: left;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
 .weather-error {
   margin-top: -10px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(255, 0, 0);
 }
 
@@ -163,16 +164,16 @@ body {
   padding: 5px;
   font-size: 20px;
   line-height: 24px;
-  color: #fff;  
+  color: #fff;
   border: 0;
   outline: 0;
   border-bottom: 1px solid #fff;
   background-color: transparent;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
-.city::placeholder {  
+.city::placeholder {
   font-size: 20px;
   color: #fff;
   opacity: .6;
@@ -186,7 +187,7 @@ body {
   align-items: center;
   width: 100%;
   height: 40vh;
-  min-height: 260px;  
+  min-height: 260px;
   padding: 20px;
 }
 
@@ -212,8 +213,8 @@ body {
   margin-bottom: 10px;
   font-family: 'Arial-MT';
   font-size: 100px;
-  letter-spacing: -4px; 
-  text-shadow: 
+  letter-spacing: -4px;
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
@@ -221,7 +222,7 @@ body {
   min-height: 28px;
   font-size: 24px;
   margin-bottom: 20px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
@@ -233,12 +234,12 @@ body {
   min-height: 48px;
   width: 100vw;
   font-size: 40px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
 .greeting {
-  flex: 1;  
+  flex: 1;
   padding: 10px;
   text-align: right;
 }
@@ -253,7 +254,7 @@ body {
   background-color: transparent;
   border: 0;
   outline: 0;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
@@ -269,31 +270,31 @@ body {
   align-items: center;
   width: 100%;
   height: 30vh;
-  min-height: 160px;  
+  min-height: 160px;
   padding: 20px;
 }
 
 .change-quote {
   margin-bottom: 30px;
-  background-image: url("../assets/svg/reload.svg");  
+  background-image: url("../assets/svg/reload.svg");
 }
 
 .quote {
   min-height: 32px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
 .author {
   min-height: 20px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
 @media (max-width: 768px) {
   .time {
     min-height: 80px;
-    font-size: 72px;    
+    font-size: 72px;
   }
 
   .greeting-container {
@@ -349,14 +350,14 @@ body {
   position: absolute;
   bottom: 10px;
   left: 15px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
 
 .settings-ico {
- cursor: pointer;
- opacity: .65;
+  cursor: pointer;
+  opacity: .65;
 }
 
 .settings-ico:hover {
@@ -378,14 +379,14 @@ body {
   height: auto;
   bottom: 50px;
   background-color: rgba(15, 15, 15, 0.7);
-  border: 1px solid #fff ;
+  border: 1px solid #fff;
   border-radius: 15px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
-  
+
 }
 
-.settings-popup > h2 {
+.settings-popup>h2 {
   text-align: center;
   padding: 5px 15px;
 }
@@ -414,10 +415,10 @@ body {
 }
 
 .ico {
- width: 30px;
- height: 30px;
- position: relative;
- margin-right: 15px;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin-right: 15px;
 }
 
 .transparent {
@@ -465,17 +466,17 @@ body {
 }
 
 .main-goal-container {
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: space-between;
- margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
 }
 
 .mg-heading {
   font-family: 'Roboto', sans-serif;
   padding: 0 0 20px;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
@@ -497,12 +498,12 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   color: #fff;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
 .secret-heading {
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgb(2, 2, 2);
 }
 
@@ -512,11 +513,13 @@ body {
   cursor: pointer;
   opacity: .75;
 }
+
 .mg-reset:hover {
   transform: scale(1.1);
   transition: linear .3s;
   opacity: 1;
 }
+
 .mg-reset:not(hover) {
   transform: scale(1);
   transition: linear .3s;
@@ -534,11 +537,12 @@ body {
   font-size: 0.75em;
   overflow: hidden;
   margin-bottom: 20px;
+  
 
   display: grid;
   grid-template-rows: 6px auto;
 
-  
+
 }
 
 .timeline {
@@ -556,124 +560,127 @@ body {
   transition: 0.25s;
 }
 
-.controls {
+.audio-player .controls {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  padding: 0 10px;
-  position: relative;
-      z-index: 2;
+  padding: 0 10px 0 10px;
 }
 
-.controls > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.audio-player .controls>* {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .toggle-play.play {
-  
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      height: 0;
-      width: 0;
-      border: 6px solid #0000;
-      border-left: 12px solid white;
-    }
+.audio-player .controls .toggle-play.play {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  height: 0;
+  width: 0;
+  border: 7px solid #000 0;
+  border-left: 13px solid white;
+}
 
-    .toggle-play.play:hover {
-      transform: scale(1.2);
-      transition: all .3s;
-    }
+.audio-player .controls .toggle-play.play:hover {
+  transform: scale(1.1);
+}
 
-    .toggle-play.play.pause {
-      height: 15px;
-      width: 20px;
-      cursor: pointer;
-      position: relative;
-    }
+.audio-player .controls .toggle-play.pause {
+  height: 15px;
+  width: 20px;
+  cursor: pointer;
+  position: relative;
+}
 
-    .toggle-play.play.pause:before {
-      position: absolute;
-      top: 0;
-      left: 0px;
-      background: white;
-      content: "";
-      height: 15px;
-      width: 3px;
-    }
+.audio-player .controls .toggle-play.pause:before {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  background: white;
+  content: "
+"
+;
+  height: 15px;
+  width: 3px;
+}
 
-    .toggle-play.play.pause:after {
-      position: absolute;
-      top: 0;
-      right: 8px;
-      background: white;
-      content: "";
-      height: 15px;
-      width: 3px;
-    }
+.audio-player .controls .toggle-play.pause:after {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  background: white;
+  content: "
+"
+;
+  height: 15px;
+  width: 3px;
+}
 
-    .toggle-play.play.pause:hover {
-      transform: scale(1.1);
-    }
+.audio-player .controls .toggle-play.pause:hover {
+  transform: scale(1.1);
+}
 
-        .time {
-          display: flex;
-        }
-    
-        .time>* {
-          padding: 2px;
-        }
-    
-        .volume-container {
-          cursor: pointer;
-        }
-    
-        .volume-container.volume-button {
-          height: 26px;
-          display: flex;
-          align-items: center;
-        }
-    
-        .volume-container.volume {
-          transform: scale(0.7);
-        }
+.audio-player .controls .time {
+  display: flex;
+}
 
-        .volume-slider {
-          position: absolute;
-          left: -3px; top: 15px;
-          z-index: -1;
-          width: 0;
-          height: 15px;
-          background: white;
-          box-shadow: 0 0 20px #000a;
-          transition: .25s;
-        }
+.audio-player .controls .time>* {
+  padding: 2px;
+}
 
-        .volume-sliderhover {
-            left: -123px;
-            width: 120px;
-          }
+.audio-player .controls .volume-container {
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
 
-        .volume-percentage {
-          background: coral;
-          height: 100%;
-          width: 75%;
-        }
+.audio-player .controls .volume-container .volume-button {
+  height: 26px;
+  display: flex;
+  align-items: center;
+}
 
-        .vol-ico {
-          width: 20px;
-          height: 20px;
-          filter: invert();
-        }
+.audio-player .controls .volume-container .volume-button .volume {
+  transform: scale(0.7);
+}
+
+.audio-player .controls .volume-container .volume-slider {
+  position: absolute;
+  left: -3px;
+  top: 15px;
+  z-index: -1;
+  width: 0;
+  height: 15px;
+  background: white;
+  box-shadow: 0 0 20px #000 a;
+  transition: 0.25s;
+}
+
+.audio-player .controls .volume-container .volume-slider .volume-percentage {
+  background: coral;
+  height: 100%;
+  width: 75%;
+}
+
+.audio-player .controls .volume-container:hover .volume-slider {
+  left: -123px;
+  width: 120px;
+}
+
+.vol-ico {
+  width: 20px;
+  height: 20px;
+  filter: invert();
+}
 
 .btn {
   margin: 0 2px;
 }
 
 .music-name {
- 
+
   width: auto;
 }
 
