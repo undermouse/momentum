@@ -148,6 +148,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   column-gap: 12px;
+
 }
 
 .weather-icon {
@@ -507,12 +508,15 @@ body {
   width: 25px;
   height: 25px;
   cursor: pointer;
+  opacity: .75;
 }
 .mg-reset:hover {
   transform: scale(1.1);
   transition: linear .3s;
+  opacity: 1;
 }
 .mg-reset:not(hover) {
   transform: scale(1);
-  transition: linear .3s;;
+  transition: linear .3s;
+  opacity: .75;
 }

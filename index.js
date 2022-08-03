@@ -18,6 +18,8 @@ const weather = document.querySelector('.weather');
 const changeQuote = document.querySelector('.change-quote');
 const weatherIcon = document.querySelector('.weather-icon');
 const temperature = document.querySelector('.temperature');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
 const weatherDescription = document.querySelector('.weather-description');
 const player = document.querySelector('.player');
 const playListUl = document.querySelector('.play-list');
@@ -270,14 +272,12 @@ const setBgFromApi = (offset) => {
 
     const img = new Image();
     let bgUrl = `https://source.unsplash.com/random/${width}x${height}/?${tags},${timeOfDay}`;
-    console.log(bgUrl);
 
     img.src = bgUrl;
     img.onload = () => {
       body.style.backgroundImage = `url('${img.src}')`;
     }
 
-    console.log(bgUrl);
     
 }
 // Slides switchers
@@ -328,8 +328,34 @@ async function getWeather(city) {
   
   weatherIcon.className = 'weather-icon owf';
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-  temperature.textContent = `${data.main.temp}°C`;
+  temperature.textContent = `${Math.floor(data.main.temp)}°C`;
   weatherDescription.textContent = data.weather[0].description;
+  wind.textContent = Math.ceil(data.wind.speed) + ' m/s ' + windDescription(data.wind.deg);
+  if (userLang === 'ru') {
+   humidity.textContent = `${data.main.humidity}% влажность`;
+  } else {
+    humidity.textContent = `${data.main.humidity}% humidity`;
+  }
+}
+
+const windDescription = (windDirection) => {
+  if (windDirection >= 0 && windDirection < 45) {
+    return 'N';
+  } else if (windDirection >= 45 && windDirection < 90) {
+    return 'N-W';
+  } else if (windDirection >= 90 && windDirection < 135) {
+    return 'W';
+  } else if (windDirection >= 135 && windDirection < 180) {
+    return 'S-W';
+  } else if (windDirection >= 180 && windDirection < 225) {
+    return 'S';
+  } else if (windDirection >= 225 && windDirection < 270) {
+    return 'S-E';
+  } else if (windDirection >= 270 && windDirection < 315) {
+    return 'N-E';
+  } else if (windDirection >= 315 && windDirection < 359) {
+    return 'N-E';
+  }
 }
 
 // Quotes widget
@@ -349,7 +375,6 @@ async function getQuote(lang) {
 
 // Settings
 const loadOnlyVisibleStuff = () => {
-  console.log(LS);
   
   settListItem.forEach((el) => {
     let blockToHide = document.getElementById(el.id);
@@ -417,7 +442,6 @@ settListItem.forEach((el) => {
       LS.removeItem(`${el.id}`, 'hidden');
       blockVisible = true;
     }  
-    console.log(LS) 
   }
 
 })
@@ -446,10 +470,7 @@ photoRadio.onchange = (e) => {
   } else {
     apiTags.disabled = true;
   }
-  setBg(randomNum);
-
-  console.log(LS);
-  
+  setBg(randomNum);  
 }
 
 
