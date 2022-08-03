@@ -22,12 +22,18 @@ const weatherError = document.querySelector('.weather-error');
 const wind = document.querySelector('.wind');
 const humidity = document.querySelector('.humidity');
 const weatherDescription = document.querySelector('.weather-description');
-const player = document.querySelector('.player');
+
+// Player consts
+const player = document.querySelector('.audio-player');
 const playListUl = document.querySelector('.play-list');
 const selectedSong = document.querySelector('.play-item');
 const playPrevBtn = document.querySelector('.play-prev');
 const playNextBtn = document.querySelector('.play-next');
 const playBtn  = document.getElementById('play-btn');
+const musicName = document.querySelector('.music-name');
+const musicLength = document.querySelector('.length');
+//
+
 const footerCont = document.querySelector('.footer-container');
 const photoRadio = document.getElementById('photo-radio');
 const apiTags = document.querySelector('.tags');
@@ -111,18 +117,30 @@ import playList from "./playList.js";
 // Audio Player
 const audio = new Audio(); 
 audio.src = playList[playNum].src;
+musicLength.textContent = playList[0].duration;
+musicName.textContent = playList[0].title;
+
 
 const toggleAudio = () => {
   if (isPlay === false) { 
     audio.play();
     audio.currentTime = 0; 
     isPlay = true;
+    musicLength.textContent = playList[playNum].duration;
+    musicName.textContent = playList[playNum].title;
+    
   } else {
     audio.pause();
     audio.currentTime = 0; 
     isPlay = false;
   }
 }
+
+playBtn.onclick = () => {
+  
+  
+}
+
 
 playNextBtn.addEventListener('click', () => {
   audio.pause();
@@ -132,6 +150,8 @@ playNextBtn.addEventListener('click', () => {
     playNum = 1;
   }
   audio.src = playList[playNum].src;
+  musicLength.textContent = playList[playNum].duration;
+  musicName.textContent = playList[playNum].title;
   audio.play();
 })
 
@@ -139,6 +159,8 @@ playNextBtn.addEventListener('click', () => {
 playPrevBtn.addEventListener('click', () => {
   playNum -= 1;
   audio.play();
+  musicLength.textContent = playList[playNum].duration;
+  musicName.textContent = playList[playNum].title;
 })
 
 playBtn.onclick = () => {
@@ -157,6 +179,8 @@ function createPlayList() {
 }
 
 createPlayList();
+
+
 
 // Additional funcs
 const getRandomInt = (min, max) => {
