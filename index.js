@@ -270,6 +270,7 @@ function createPlayList() {
               musicName.textContent = el.title;
               
               audio.play();
+              playBtn.classList.add('pause');
             })
              playListUl.append(li);
       })
