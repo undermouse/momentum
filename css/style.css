@@ -579,8 +579,8 @@ body {
   left: 0;
   height: 0;
   width: 0;
-  border: 7px solid #000 0;
-  border-left: 13px solid white;
+  /* border: 7px solid #000 0;
+  border-left: 13px solid white; */
 }
 
 .audio-player .controls .toggle-play.play:hover {
@@ -649,19 +649,23 @@ body {
 .audio-player .controls .volume-container .volume-slider {
   position: absolute;
   left: -3px;
-  top: 15px;
+  top: 18.45px;
   z-index: -1;
   width: 0;
   height: 15px;
   background: white;
   box-shadow: 0 0 20px #000 a;
   transition: 0.25s;
+  opacity: .9;
+  border-radius: 2px;
+
 }
 
 .audio-player .controls .volume-container .volume-slider .volume-percentage {
-  background: coral;
+  background: dodgerblue;
   height: 100%;
   width: 75%;
+  
 }
 
 .audio-player .controls .volume-container:hover .volume-slider {
@@ -670,9 +674,17 @@ body {
 }
 
 .vol-ico {
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
   filter: invert();
+  background-image: url("../assets/svg/volume.svg");
+}
+
+.mute-ico {
+  width: 35px;
+  height: 35px;
+  filter: invert();
+  background-image: url("../assets/svg/volume-mute.svg");
 }
 
 .btn {

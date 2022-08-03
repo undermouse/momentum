@@ -32,6 +32,7 @@ const playNextBtn = document.querySelector('.play-next');
 const playBtn  = document.getElementById('play-btn');
 const musicName = document.querySelector('.music-name');
 const musicLength = document.querySelector('.length');
+const volume = document.querySelector('.volume');
 //
 
 const footerCont = document.querySelector('.footer-container');
@@ -151,7 +152,6 @@ audio.addEventListener(
 
 const volumeSlider = document.querySelector(".volume-slider");
 volumeSlider.addEventListener('click', e => {
-  console.log('slider clicked')
   const sliderWidth = window.getComputedStyle(volumeSlider).width;
   const newVolume = e.offsetX / parseInt(sliderWidth);
   audio.volume = newVolume;
@@ -165,6 +165,24 @@ setInterval(() => {
     audio.currentTime
   );
 }, 500);
+
+volume.onclick = () => {
+  const sliderW = document.querySelector(".volume-percentage");
+  if (audio.volume !== 0) {
+    audio.volume = 0;
+    volume.classList.remove('vol-ico');
+    volume.classList.add('mute-ico');
+    sliderW.style.display = 'none';
+    
+  } else {
+    audio.volume = 0.75;
+    volume.classList.remove('mute-ico');
+    volume.classList.add('vol-ico');
+    sliderW.style.display = 'flex';
+  }
+
+  
+}
 
 playBtn.onclick = () => {
   toggleAudio();
@@ -237,11 +255,28 @@ function createPlayList() {
             const li = document.createElement('li');
             li.classList.add('play-item');
             li.innerHTML = el.title;
-            playListUl.append(li);
+
+            li.addEventListener('click', (e) => {
+                          
+              for (let i = 0; i < playList.length; i++) {
+                playListUl.children[i].classList.remove('now-playing')
+              }
+              audio.src = el.src;
+              isPlay = true;
+              audio.currentTime = 0;
+              
+              li.classList.add('now-playing');
+              e.target.classList.add('now-playing');
+              musicName.textContent = el.title;
+              
+              audio.play();
+            })
+             playListUl.append(li);
+      })
+    }
+           
             
-        }
-    )
-}
+
 
 createPlayList();
 
