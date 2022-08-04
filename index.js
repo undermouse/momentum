@@ -720,4 +720,18 @@ mainGoalReset.onclick = () => {
 }
 
 
+const github = document.querySelector('.github');
+const codewars = document.querySelector('.codewars');
+const rs = document.querySelector('.rs');
+
+github.onclick = () => {
+  window.open('https://github.com/undermouse/momentum', '_blank').focus();
+}
+codewars.onclick = () => {
+  window.open('https://www.codewars.com/users/undermouse', '_blank').focus();
+}
+rs.onclick = () => {
+  window.open('https://rs.school/js/', '_blank').focus();
+}
+
 

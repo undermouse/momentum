@@ -698,15 +698,6 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-
-}
-
-
-@media screen and (max-width: 320px) {
-  .music-name {
-    display: none; 
-  }
-
   .current, .divider, .length {
     display: none;
   }
@@ -734,7 +725,74 @@ body {
     justify-items: centers;
     justify-content: space-between;
   }
+}
 
- 
+
+@media screen and (max-width: 320px) {
+  .main-goal-input {
+    min-width: 200px;
+  }
+
+  main {
+    height: 500px;
+  }
+
   
 }
+
+.footer-social {
+  background: rgba(0, 0, 0, 0, .5);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  gap: 50px;
+  margin-top: 50px;
+}
+
+.social-ico {
+ width: 40px;
+ height: 40px;
+ opacity: .85;
+}
+
+.github {
+ background-image: url("/assets/svg/github-logo.svg");
+}
+
+.codewars {
+  background-image: url("/assets/svg/codewars-logo.svg");
+}
+
+.rs {
+  background-color: #000;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.social-ico:hover {
+  transform: scale(1.15);
+  transition: all .3s;
+  cursor: pointer;
+ }
+
+ .social-ico:not(hover) {
+  transition: all .25s;
+  transform: scale(1);
+ }
+
+ .copy {
+  display: inline;
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  color: #fff;
+  font-family: 'Roboto';
+  font-weight: bold;
+ }
+
+ .copy > p {
+  text-shadow: 3px 2px 3px #000;
+ }
